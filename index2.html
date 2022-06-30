@@ -1,0 +1,82 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100%;
+        }
+        
+        .text-green {
+            color: green;
+        }
+        
+        .text-red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <section v-show="inCompletedAssignments.length">
+            <h2>In completed Assignments</h2>
+            <ul>
+                <li v-for="assignment in assignments.filter(a=>!a.complete)" :key="assignment.id">
+                    {{ assignment.name }}
+                    <input type="checkbox" v-model="assignment.complete" name="" id="" />
+                </li>
+            </ul>
+        </section>
+
+        <section class="mt-8" v-show="completedAssignments.length">
+            <h2>Completed Assignments</h2>
+            <ul>
+                <li v-for="assignment in assignments.filter(a=>a.complete)" :key="assignment.id">
+                    {{ assignment.name }}
+                    <input type="checkbox" v-model="assignment.complete" name="" id="" />
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <script>
+        let app = {
+            data() {
+                return {
+                    assignments: [{
+                        name: "REad Book",
+                        complete: false,
+                        id: 1
+                    }, {
+                        name: "Finish project",
+                        complete: false,
+                        id: 2
+                    }, {
+                        name: "Study Vue",
+                        complete: false,
+                        id: 3
+                    }, ],
+                };
+            },
+            computed: {
+                completedAssignments() {
+                    return this.assignments.filter(a => a.complete);
+                },
+                inCompletedAssignments() {
+                    return this.assignments.filter(a => !a.complete);
+                },
+            }
+        };
+        Vue.createApp(app).mount("#app");
+    </script>
+</body>
+
+</html>

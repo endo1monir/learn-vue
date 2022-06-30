@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            height: 100%;
+        }
+        
+        .text-green {
+            color: green;
+        }
+        
+        .text-red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <button v-bind:class="buttonclasses" v-on:click="toggle">Click Me</button> -->
+        <button v-bind:class="active?'text-green':'text-red'" v-on:click="toggle">Click Me</button>
+        <p>
+            <input type="text" v-model="greeting">
+        </p>
+        <p> {{greeting }} ({{ greeting.length}})</p>
+
+        <section>
+            <h2>Assignments</h2>
+            <ul>
+                <li>Finish Project <input type="checkbox" name="" id=""></li>
+                <li>Read Book <input type="checkbox" v-model="" name="" id=""></li>
+            </ul>
+        </section>
+
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    greeting: 'hello fucken world',
+                    buttonclasses: 'text-green',
+                    active: true
+                }
+            },
+            methods: {
+                toggle() {
+                    // this.buttonclasses = "text-red"
+                    this.active = !this.active;
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
